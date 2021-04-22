@@ -26,7 +26,6 @@ func (hms Hms) Today() time.Time {
 }
 
 func New(str string) (*Hms, error) {
-
 	if str == "" || str == "null" {
 		return &Hms{}, nil
 	}
@@ -44,11 +43,7 @@ func New(str string) (*Hms, error) {
 }
 
 func (hms Hms) String() string {
-	f := hms.Format(timeLayout)
-	if f == midnight {
-		return midnight24
-	}
-	return f
+	return hms.Format(timeLayout)
 }
 
 func (hms *Hms) UnmarshalJSON(b []byte) (err error) {
@@ -72,9 +67,6 @@ func (hms Hms) MarshalJSON() ([]byte, error) {
 }
 
 func (hms Hms) Value() (driver.Value, error) {
-	if hms.String() == midnight24 {
-		return midnight, nil
-	}
 	return hms.Format(timeLayout), nil
 }
 

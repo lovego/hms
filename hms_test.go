@@ -12,22 +12,11 @@ func ExampleMidnight() {
 		FinishedAt Hms    `json:"finishedAt"`
 	}
 
-	d, err := New("24:00:00")
+	_, err := New("24:00:00")
 	fmt.Println(err)
-
-	stu := Stu{Name: "A", FinishedAt: *d}
-	b, _ := json.Marshal(stu)
-	fmt.Println(string(b))
-
-	stu2 := Stu{}
-	data := []byte(`{"name": "W5", "finishedAt": "24:00:00"}`)
-	json.Unmarshal(data, &stu2)
-	fmt.Println(stu2.FinishedAt)
 
 	// Output:
 	// <nil>
-	// {"name":"A","finishedAt":"24:00:00"}
-	// 24:00:00
 }
 
 func ExampleHms() {
