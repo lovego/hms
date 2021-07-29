@@ -1,3 +1,4 @@
+// Package hms reprenets hour, minute, second.
 package hms
 
 import (
@@ -17,12 +18,13 @@ const (
 	midnight   = "23:59:59"
 )
 
-func (hms Hms) Today() time.Time {
-	if hms.Time.IsZero() {
-		return time.Now()
-	}
+// OfToday return the time(hour,minute,second) of today.
+func (hms Hms) OfToday() time.Time {
 	now := time.Now()
-	return time.Date(0, 0, 0, hms.Hour(), hms.Minute(), hms.Second(), 0, now.Location())
+	return time.Date(
+		now.Year(), now.Month(), now.Day(),
+		hms.Hour(), hms.Minute(), hms.Second(), 0, now.Location(),
+	)
 }
 
 func New(str string) (*Hms, error) {
